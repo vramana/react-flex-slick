@@ -1,6 +1,6 @@
 {
   "name": "react-flex-slick",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Slick carousel using Flexbox",
   "main": "./lib/index.js",
   "scripts": {
@@ -19,7 +19,8 @@
     "slick",
     "carousel",
     "react-slick",
-    "react-flex-slick"
+    "react-flex-slick",
+    "react-component"
   ],
   "author": "Ramana Venkata <idlike2dream@gmail.com> (http://github.com/vramana)",
   "license": "MIT",
@@ -37,15 +38,13 @@
     "eslint-config-airbnb": "0.0.8",
     "eslint-plugin-react": "^3.3.2",
     "express": "^4.13.3",
+    "react": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1",
     "react-transform-catch-errors": "^0.1.1",
     "react-transform-webpack-hmr": "^0.1.2",
     "redbox-react": "^1.0.3",
     "webpack": "^1.12.1",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.0.1"
-  },
-  "dependencies": {
-    "react": "^0.14.0-rc1",
-    "react-dom": "^0.14.0-rc1"
   }
 }
