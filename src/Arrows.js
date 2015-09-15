@@ -3,18 +3,23 @@ import React, { Component, PropTypes } from 'react';
 class LeftArrow extends Component {
   static propTypes = {
     handleClick: PropTypes.func.isRequired,
-    className: PropTypes.string.isRequired
+    currentSlide: PropTypes.number.isRequired,
+    activeClassName: PropTypes.string.isRequired,
+    inactiveClassName: PropTypes.string.isRequired
   }
 
-  // HACK for propsTypes handleClick
+  // HACK for propsTypes handleClick, currentSlide
   static defaultProps = {
     handleClick: () => {},
-    className: ''
+    activeClassName: '',
+    inactiveClassName: '',
+    currentSlide: 0
   }
 
   render() {
-    const { className } = this.props;
+    const { activeClassName, inactiveClassName, currentSlide } = this.props;
 
+    const className = currentSlide === 0 ? inactiveClassName : activeClassName;
     const style = className !== '' ? null : {
       width: 0,
       height: 0,
@@ -33,18 +38,23 @@ class LeftArrow extends Component {
 class RightArrow extends Component {
   static propTypes = {
     handleClick: PropTypes.func.isRequired,
-    className: PropTypes.string.isRequired
+    currentSlide: PropTypes.number.isRequired,
+    activeClassName: PropTypes.string.isRequired,
+    inactiveClassName: PropTypes.string.isRequired
   }
 
-  // HACK for propsTypes handleClick
+  // HACK for propsTypes handleClick, currentSlide
   static defaultProps = {
     handleClick: () => {},
-    className: ''
+    activeClassName: '',
+    inactiveClassName: '',
+    currentSlide: 0
   }
 
   render() {
-    const { className } = this.props;
+    const { activeClassName, inactiveClassName, currentSlide } = this.props;
 
+    const className = currentSlide === 0 ? inactiveClassName : activeClassName;
     const style = className !== '' ? null : {
       width: 0,
       height: 0,
