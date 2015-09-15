@@ -12,7 +12,7 @@
   "rules": {
     "quotes": [2, "single"],
     "strict": [2, "never"],
-    "comma-dangle": [0],
+    "comma-dangle": [2, "never"],
     "no-undef": 2,
     "func-names": 0,
 

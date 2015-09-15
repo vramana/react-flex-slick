@@ -14,7 +14,6 @@ class Page extends Component {
     const pageStyle = {
       width: pageWidth,
       height: pageHeight,
-      backgroundColor: '#35BA23',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
@@ -74,14 +73,16 @@ class Slides extends Component {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     vertical: PropTypes.bool.isRequired,
-    currentSlide: PropTypes.number.isRequired
+    currentSlide: PropTypes.number.isRequired,
+    pageClass: PropTypes.string.isRequired
   }
 
   static defaultProps = {
     width: 0,
     height: 0,
     vertical: false,
-    currentSlide: 0
+    currentSlide: 0,
+    pageClass: ''
   }
 
   render() {

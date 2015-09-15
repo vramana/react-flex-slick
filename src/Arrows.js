@@ -2,16 +2,20 @@ import React, { Component, PropTypes } from 'react';
 
 class LeftArrow extends Component {
   static propTypes = {
-    handleClick: PropTypes.func.isRequired
+    handleClick: PropTypes.func.isRequired,
+    className: PropTypes.string.isRequired
   }
 
   // HACK for propsTypes handleClick
   static defaultProps = {
-    handleClick: () => {}
+    handleClick: () => {},
+    className: ''
   }
 
   render() {
-    const leftArrowAtyle = {
+    const { className } = this.props;
+
+    const style = className !== '' ? null : {
       width: 0,
       height: 0,
       borderBottom: 'solid 30px transparent',
@@ -20,7 +24,7 @@ class LeftArrow extends Component {
     };
 
     return (
-      <div style={leftArrowAtyle} onClick={::this.props.handleClick}>
+      <div className={className} style={style} onClick={::this.props.handleClick}>
       </div>
     );
   }
@@ -28,16 +32,20 @@ class LeftArrow extends Component {
 
 class RightArrow extends Component {
   static propTypes = {
-    handleClick: PropTypes.func.isRequired
+    handleClick: PropTypes.func.isRequired,
+    className: PropTypes.string.isRequired
   }
 
   // HACK for propsTypes handleClick
   static defaultProps = {
-    handleClick: () => {}
+    handleClick: () => {},
+    className: ''
   }
 
   render() {
-    const rightArrowAtyle = {
+    const { className } = this.props;
+
+    const style = className !== '' ? null : {
       width: 0,
       height: 0,
       borderBottom: 'solid 30px transparent',
@@ -46,7 +54,7 @@ class RightArrow extends Component {
     };
 
     return (
-      <div style={rightArrowAtyle} onClick={::this.props.handleClick}></div>
+      <div className={className} style={style} onClick={::this.props.handleClick}></div>
     );
   }
 }
