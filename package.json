@@ -1,6 +1,6 @@
 {
   "name": "react-flex-slick",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Slick carousel using Flexbox",
   "main": "./lib/index.js",
   "scripts": {
@@ -48,7 +48,6 @@
     "webpack-hot-middleware": "^2.0.1"
   },
   "peerDependencies": {
-    "react": ">= 0.14 || ^0.14.0-rc",
-    "react-dom": ">= 0.14 || ^0.14.0-rc"
+    "react": ">= 0.14 || ^0.14.0-rc"
   }
 }
