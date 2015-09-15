@@ -4,11 +4,12 @@ class Page extends Component {
   static propTypes = {
     children: PropTypes.any,
     vertical: PropTypes.bool.isRequired,
-    count: PropTypes.number.isRequired
+    count: PropTypes.number.isRequired,
+    className: PropTypes.string.isRequired
   }
 
   render() {
-    const { count, vertical } = this.props;
+    const { count, vertical, className } = this.props;
     const pageWidth = vertical ? '100%' : `${100 / count}%`;
     const pageHeight = vertical ? `${100 / count}%` : '100%';
     const pageStyle = {
@@ -20,7 +21,7 @@ class Page extends Component {
     };
 
     return (
-      <div style={pageStyle}>
+      <div className={className} style={pageStyle}>
           {this.props.children}
       </div>
     );
@@ -32,11 +33,12 @@ class Track extends Component {
   static propTypes = {
     children: PropTypes.any,
     vertical: PropTypes.bool.isRequired,
-    currentSlide: PropTypes.number.isRequired
+    currentSlide: PropTypes.number.isRequired,
+    pageClass: PropTypes.string.isRequired
   }
 
   render() {
-    const { vertical, currentSlide } = this.props;
+    const { vertical, currentSlide, pageClass } = this.props;
     const count = Children.count(this.props.children);
 
     const trackWidth = vertical ? '100%' : `${100 * count}%`;
@@ -57,7 +59,10 @@ class Track extends Component {
     };
 
     const slides = Children.map(this.props.children, (child, i) =>
-      <Page count={count} vertical={vertical} >{cloneElement(child, { key: i})}</Page>);
+      <Page count={count} vertical={vertical} pageClass={pageClass} >
+        {cloneElement(child, { key: i})}
+      </Page>
+    );
 
     return (
       <div style={trackStyle}>
@@ -86,7 +91,7 @@ class Slides extends Component {
   }
 
   render() {
-    const { width, height, vertical, currentSlide } = this.props;
+    const { width, height, vertical, currentSlide, pageClass } = this.props;
 
     const containerWidth = width === 0 ? '100%' : width;
     const containerHeight = height === 0 ? '100%' : height;
@@ -99,7 +104,7 @@ class Slides extends Component {
 
     return (
       <div style={containerStyle}>
-        <Track vertical={vertical} currentSlide={currentSlide}>
+        <Track vertical={vertical} currentSlide={currentSlide} pageClass={pageClass} >
           {this.props.children}
         </Track>
       </div>
