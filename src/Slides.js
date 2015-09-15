@@ -34,11 +34,14 @@ class Track extends Component {
     children: PropTypes.any,
     vertical: PropTypes.bool.isRequired,
     currentSlide: PropTypes.number.isRequired,
-    pageClass: PropTypes.string.isRequired
+    pageClass: PropTypes.string.isRequired,
+    transitionSpeed: PropTypes.number.isRequired,
+    transitionTimingFn: PropTypes.string.isRequired
   }
 
   render() {
-    const { vertical, currentSlide, pageClass } = this.props;
+    const { vertical, currentSlide, pageClass,
+            transitionSpeed, transitionTimingFn } = this.props;
     const count = Children.count(this.props.children);
 
     const trackWidth = vertical ? '100%' : `${100 * count}%`;
@@ -46,6 +49,7 @@ class Track extends Component {
     const translateX = vertical ? 0 : (100 * currentSlide) / count;
     const translateY = vertical ? (100 * currentSlide) / count : 0;
     const trackTransform = `translate3d(${-translateX}%, ${-translateY}%, 0)`;
+    const trackTransition = `all ${transitionSpeed}ms ${transitionTimingFn}`;
     const flexDirection = vertical ? ' column' : 'row';
 
     const trackStyle = {
@@ -55,11 +59,11 @@ class Track extends Component {
       flexDirection,
       flexShrink: 0,
       transform: trackTransform,
-      transition: `all 1000ms ease`
+      transition: trackTransition
     };
 
     const slides = Children.map(this.props.children, (child, i) =>
-      <Page count={count} vertical={vertical} pageClass={pageClass} >
+      <Page count={count} vertical={vertical} className={pageClass} >
         {cloneElement(child, { key: i})}
       </Page>
     );
@@ -79,7 +83,9 @@ class Slides extends Component {
     height: PropTypes.number.isRequired,
     vertical: PropTypes.bool.isRequired,
     currentSlide: PropTypes.number.isRequired,
-    pageClass: PropTypes.string.isRequired
+    pageClass: PropTypes.string.isRequired,
+    transitionSpeed: PropTypes.number.isRequired,
+    transitionTimingFn: PropTypes.string.isRequired
   }
 
   static defaultProps = {
@@ -87,11 +93,14 @@ class Slides extends Component {
     height: 0,
     vertical: false,
     currentSlide: 0,
-    pageClass: ''
+    pageClass: '',
+    transitionSpeed: 500,
+    transitionTimingFn: 'ease'
   }
 
   render() {
-    const { width, height, vertical, currentSlide, pageClass } = this.props;
+    const { width, height, vertical, currentSlide, pageClass,
+            transitionSpeed, transitionTimingFn } = this.props;
 
     const containerWidth = width === 0 ? '100%' : width;
     const containerHeight = height === 0 ? '100%' : height;
@@ -104,7 +113,11 @@ class Slides extends Component {
 
     return (
       <div style={containerStyle}>
-        <Track vertical={vertical} currentSlide={currentSlide} pageClass={pageClass} >
+        <Track vertical={vertical}
+               currentSlide={currentSlide}
+               pageClass={pageClass}
+               transitionSpeed={transitionSpeed}
+               transitionTimingFn={transitionTimingFn} >
           {this.props.children}
         </Track>
       </div>
