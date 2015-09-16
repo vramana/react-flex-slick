@@ -12,6 +12,9 @@ class Slider extends Component {
     vertical: false
   }
 
+  /**
+    * @constructor
+    */
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -20,7 +23,29 @@ class Slider extends Component {
     };
   }
 
-  handleArrowClick(delta) {
+  /**
+   * Go the next slide
+   * @method
+   */
+  next = () => {
+    this.handleSlideShift(1);
+  }
+
+  /**
+   * Go the previous slide
+   * @method
+   */
+  previous = () => {
+    this.handleSlideShift(-1);
+  }
+
+  /**
+   * Change the position of a slider by `delta`
+   * @method
+   * @private
+   * @param {number} delta - Move forward the slide by delta (delta can be negative)
+   */
+  handleSlideShift(delta) {
     const { currentSlide, animating } = this.state;
     if (animating || delta === 0) {
       return;
@@ -32,6 +57,8 @@ class Slider extends Component {
     const slidesDOMNode = sliderDOMNode.children[1];
     const trackDOMNode = slidesDOMNode.children[0];
 
+    // TODO EndEventListeners are not reliable.So, replace them setTimeout
+    // See react 0.14.0-rc1 blog post.
     const callback = () => {
       this.setState({
         animating: false
@@ -57,13 +84,13 @@ class Slider extends Component {
 
     const newLeftArrow = cloneElement(leftArrow, {
       key: 0,
-      handleClick: () => { this.handleArrowClick(-1); },
+      handleClick: () => { this.previous(); },
       currentSlide
     });
 
     const newRightArrow = cloneElement(rightArrow, {
       key: 2,
-      handleClick: () => { this.handleArrowClick(1); },
+      handleClick: () => { this.next(); },
       currentSlide
     });
 
