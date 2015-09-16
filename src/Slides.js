@@ -81,21 +81,18 @@ class Slides extends Component {
     children: PropTypes.any,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    vertical: PropTypes.bool.isRequired,
     currentSlide: PropTypes.number.isRequired,
+    vertical: PropTypes.bool,
     pageClass: PropTypes.string.isRequired,
-    transitionSpeed: PropTypes.number.isRequired,
-    transitionTimingFn: PropTypes.string.isRequired
+    transitionSpeed: PropTypes.number,
+    transitionTimingFn: PropTypes.string
   }
 
   static defaultProps = {
     width: 0,
     height: 0,
-    vertical: false,
     currentSlide: 0,
-    pageClass: '',
-    transitionSpeed: 500,
-    transitionTimingFn: 'ease'
+    pageClass: ''
   }
 
   render() {

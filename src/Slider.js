@@ -1,15 +1,19 @@
 import React, { Component, PropTypes, cloneElement, Children } from 'react';
-import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
 
 class Slider extends Component {
   static propTypes = {
     children: PropTypes.any,
-    initialSlide: PropTypes.number.isRequired
+    initialSlide: PropTypes.number.isRequired,
+    vertical: PropTypes.bool.isRequired,
+    transitionSpeed: PropTypes.number.isRequired,
+    transitionTimingFn: PropTypes.string.isRequired
   }
 
   static defaultProps = {
     initialSlide: 0,
-    vertical: false
+    vertical: false,
+    transitionSpeed: 500,
+    transitionTimingFn: 'ease'
   }
 
   /**
@@ -47,23 +51,21 @@ class Slider extends Component {
    */
   handleSlideShift(delta) {
     const { currentSlide, animating } = this.state;
+    const { transitionSpeed } = this.props;
     if (animating || delta === 0) {
       return;
     }
 
     const slides = this.props.children[1];
     const slideCount = Children.count(slides.props.children);
-    const sliderDOMNode = this.refs.slider;
-    const slidesDOMNode = sliderDOMNode.children[1];
-    const trackDOMNode = slidesDOMNode.children[0];
 
-    // TODO EndEventListeners are not reliable.So, replace them setTimeout
+    // EndEventListeners are not reliable. So,we use setTimeout
     // See react 0.14.0-rc1 blog post.
-    const callback = () => {
+    this.transitionEndCallback = () => {
       this.setState({
         animating: false
       });
-      ReactTransitionEvents.removeEndEventListener(trackDOMNode, callback);
+      delete this.transitionEndCallback;
     };
 
     if ((delta < 0 && currentSlide > 0) || (delta > 0 && currentSlide + 1 < slideCount)) {
@@ -71,15 +73,14 @@ class Slider extends Component {
         currentSlide: currentSlide + delta,
         animating: true
       }, () => {
-        ReactTransitionEvents.addEndEventListener(trackDOMNode, callback);
+        setTimeout(this.transitionEndCallback, transitionSpeed);
       });
     }
   }
 
   render() {
-    const leftArrow = this.props.children[0];
-    const slides = this.props.children[1];
-    const rightArrow = this.props.children[2];
+    const { children, transitionSpeed, transitionTimingFn, vertical } = this.props;
+    const [ leftArrow, slides, rightArrow ] = children;
     const { currentSlide } = this.state;
 
     const newLeftArrow = cloneElement(leftArrow, {
@@ -96,7 +97,10 @@ class Slider extends Component {
 
     const newSlides = cloneElement(slides, {
       key: 1,
-      currentSlide
+      currentSlide,
+      transitionSpeed,
+      transitionTimingFn,
+      vertical
     });
 
     return (
