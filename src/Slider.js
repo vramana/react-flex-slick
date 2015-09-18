@@ -29,7 +29,7 @@ class Slider extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentSlide !== this.state.currentSlide) {
+    if (nextProps.currentSlide && nextProps.currentSlide !== this.state.currentSlide) {
       this.setState({
         currentSlide: nextProps.currentSlide
       });
