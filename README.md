@@ -7,6 +7,8 @@ Uses **flexbox** exclusively, so no support for older browsers :cry: :cry:
 
 On the bright side, it is extremly flexible. Currently it supports `>=react-0.13`
 
+Any questions?? Join here [![react-flex-slick on slack](https://img.shields.io/badge/slack-react--flex--slick%40reactiflux-61DAFB.svg?style=flat-square)](http://www.reactiflux.com)
+
 ## Examples
 
 To run the examples:
