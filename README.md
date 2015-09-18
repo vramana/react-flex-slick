@@ -1,11 +1,11 @@
 React Flex Slick
 ================
 
-This is library aims to replace [react-slick][react-slick]   
+This is library aims to replace [react-slick][react-slick].
 
 Uses **flexbox** exclusively, so no support for older browsers :cry: :cry:
 
-On the bright side, it is extremly flexible. Currently only supports `react-0.14`
+On the bright side, it is extremly flexible. Currently only supports `react-0.13`
 
 ## Examples
 
@@ -15,36 +15,11 @@ To run the examples:
 2. `cd react-flex-slick && npm i`
 3. `npm start`
 
-## Usage
-
-```javascript
-import React from 'react';
-import { Slides, Slider,
-         LeftArrow, RightArrow } from 'react-flex-slick';
-
-class App extends React.Component {
-
-  render() {
-    return (
-      <Slider>
-        <LeftArrow />
-        <Slides>
-          <MySlide1 />
-          <MySlide2 />
-          <MySlide3 />
-          <MySlide4 />
-        </Slides>
-        <RightArrow />
-      </Slider>
-    );
-  }
-}
-```
-
 ## What works
 
+- Infinite and Non-infinite Mode
 - Horizontal and Vertical Sliding
-- One Slide per page
+- Multiple Slides per page (slidesToScroll = slidesToShow)
 - Left and Right Arrows to go back and forth
 
 ## TODO
@@ -61,11 +36,9 @@ class App extends React.Component {
 - [React SoundPlayer][react-soundplayer]
 - [Smart and Dumb Componenst][smart-dumb]
 
-
 ## License
 
 MIT
-
 
 [react-slick]: https://github.com/akiran/react-slick
 [react-soundplayer]: https://github.com/soundblogs/react-soundplayer
