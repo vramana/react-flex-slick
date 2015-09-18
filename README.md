@@ -23,6 +23,7 @@ To run the examples:
 - Horizontal and Vertical Sliding
 - Multiple Slides per page (slidesToScroll = slidesToShow)
 - Left and Right Arrows to go back and forth
+- Arrows have active and inactive classes.
 
 ## TODO
 

@@ -1,0 +1,51 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.banner {
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  background-color: #1282DE;
+  color: white;
+}
+
+h2 {
+  color: #333;
+}
+
+
+.non-infinite-left--active {
+  width: 0;
+  height: 0;
+  border-bottom: solid 30px transparent;
+  border-top: solid 30px transparent;
+  border-right: solid 40px #795548;
+}
+
+.non-infinite-left--inactice {
+  width: 0;
+  height: 0;
+  border-bottom: solid 30px transparent;
+  border-top: solid 30px transparent;
+  border-right: solid 40px rgba(121, 85, 72, 0.51);
+}
+
+.non-infinite-right--active {
+  width: 0;
+  height: 0;
+  border-bottom: solid 30px transparent;
+  border-top: solid 30px transparent;
+  border-left: solid 40px #795548;
+}
+
+.non-infinite-right--inactice {
+  width: 0;
+  height: 0;
+  border-bottom: solid 30px transparent;
+  border-top: solid 30px transparent;
+  border-left: solid 40px rgba(121, 85, 72, 0.51);
+}

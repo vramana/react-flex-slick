@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Slider, Slides, LeftArrow, RightArrow } from '../src';
 
+import './index.css';
+
 class App extends Component {
   render() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div>
-          <h1>Non Infinite</h1>
-          <NonInfinite width={500} height={150} />
+          <h2>Non Infinite</h2>
+          <NonInfinite width={450} height={150} />
         </div>
         <div>
-          <h1>Infinite</h1>
-          <Infinite width={500} height={150} />
+          <h2>Infinite</h2>
+          <Infinite width={450} height={150} />
         </div>
       </div>
     );
@@ -34,7 +36,8 @@ class NonInfinite extends Component {
   render() {
     return (
       <Slider>
-        <LeftArrow />
+        <LeftArrow activeClassName="non-infinite-left--active"
+                   inactiveClassName="non-infinite-left--inactice" />
         <Slides {...this.props}>
           <div style={slideStyle}><h1>1</h1></div>
           <div style={slideStyle}><h1>2</h1></div>
@@ -43,7 +46,8 @@ class NonInfinite extends Component {
           <div style={slideStyle}><h1>5</h1></div>
           <div style={slideStyle}><h1>6</h1></div>
         </Slides>
-        <RightArrow />
+        <RightArrow activeClassName="non-infinite-right--active"
+                    inactiveClassName="non-infinite-right--inactice" />
       </Slider>
     );
   }

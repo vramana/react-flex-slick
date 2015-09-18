@@ -44,6 +44,7 @@
     "react-transform-catch-errors": "^0.2.0",
     "react-transform-webpack-hmr": "^0.1.5",
     "redbox-react": "^1.0.5",
+    "style-loader": "^0.12.4",
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.1.0"

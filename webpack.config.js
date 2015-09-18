@@ -22,6 +22,11 @@ module.exports = {
         test: /\.js$/,
         include: [path.join(__dirname, 'examples'), path.join(__dirname, 'src')],
         loaders: ['babel']
+      },
+      {
+        test: /\.css$/,
+        include: [path.join(__dirname, 'examples')],
+        loaders: ['style', 'css']
       }
     ]
   }
