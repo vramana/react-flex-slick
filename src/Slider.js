@@ -3,7 +3,8 @@ import React, { Component, PropTypes, cloneElement, Children } from 'react';
 class Slider extends Component {
   static propTypes = {
     children: PropTypes.any,
-    initialSlide: PropTypes.number.isRequired,
+    initialSlide: PropTypes.number,
+    currentSlide: PropTypes.number,
     vertical: PropTypes.bool.isRequired,
     transitionSpeed: PropTypes.number.isRequired,
     transitionTimingFn: PropTypes.string.isRequired
@@ -22,9 +23,17 @@ class Slider extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      currentSlide: this.props.initialSlide,
+      currentSlide: props.currentSlide ? props.currentSlide : props.initialSlide,
       animating: false
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentSlide !== this.state.currentSlide) {
+      this.setState({
+        currentSlide: nextProps.currentSlide
+      });
+    }
   }
 
   componentWillUnmount() {
