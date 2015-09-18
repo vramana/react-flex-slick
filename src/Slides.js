@@ -79,11 +79,11 @@ class Track extends Component {
 class Slides extends Component {
   static propTypes = {
     children: PropTypes.any,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
+    width: PropTypes.number,
+    height: PropTypes.number,
     currentSlide: PropTypes.number.isRequired,
     vertical: PropTypes.bool,
-    pageClass: PropTypes.string.isRequired,
+    pageClass: PropTypes.string,
     transitionSpeed: PropTypes.number,
     transitionTimingFn: PropTypes.string
   }

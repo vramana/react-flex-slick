@@ -5,9 +5,9 @@ class Slider extends Component {
     children: PropTypes.any,
     initialSlide: PropTypes.number,
     currentSlide: PropTypes.number,
-    vertical: PropTypes.bool.isRequired,
-    transitionSpeed: PropTypes.number.isRequired,
-    transitionTimingFn: PropTypes.string.isRequired
+    vertical: PropTypes.bool,
+    transitionSpeed: PropTypes.number,
+    transitionTimingFn: PropTypes.string
   }
 
   static defaultProps = {
