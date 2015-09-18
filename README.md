@@ -5,7 +5,7 @@ This is library aims to replace [react-slick][react-slick].
 
 Uses **flexbox** exclusively, so no support for older browsers :cry: :cry:
 
-On the bright side, it is extremly flexible. Currently only supports `react-0.13`
+On the bright side, it is extremly flexible. Currently it supports `>=react-0.13`
 
 ## Examples
 
