@@ -97,17 +97,22 @@ class Slider extends Component {
     const { children, transitionSpeed, transitionTimingFn, vertical, infinite } = this.props;
     const [ leftArrow, slides, rightArrow ] = children;
     const { currentSlide } = this.state;
+    const slideCount = Children.count(slides.props.children);
 
     const newLeftArrow = cloneElement(leftArrow, {
       key: 0,
       handleClick: () => { this.handleSlideShift(-1); },
-      currentSlide
+      currentSlide,
+      infinite
     });
 
+    // Need to pass slideCount to check if end of slide has been reached.
     const newRightArrow = cloneElement(rightArrow, {
       key: 2,
       handleClick: () => { this.handleSlideShift(1); },
-      currentSlide
+      currentSlide,
+      infinite,
+      slideCount
     });
 
     // TODO Show a warning if transitionSpeed prop is declared on Slides.

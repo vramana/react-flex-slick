@@ -2,24 +2,22 @@ import React, { Component, PropTypes } from 'react';
 
 class LeftArrow extends Component {
   static propTypes = {
-    handleClick: PropTypes.func.isRequired,
-    currentSlide: PropTypes.number.isRequired,
-    activeClassName: PropTypes.string.isRequired,
-    inactiveClassName: PropTypes.string.isRequired
+    handleClick: PropTypes.func,
+    currentSlide: PropTypes.number,
+    activeClassName: PropTypes.string,
+    inactiveClassName: PropTypes.string,
+    infinite: PropTypes.bool
   }
 
-  // HACK for propsTypes handleClick, currentSlide
   static defaultProps = {
-    handleClick: () => {},
     activeClassName: '',
-    inactiveClassName: '',
-    currentSlide: 0
+    inactiveClassName: ''
   }
 
   render() {
-    const { activeClassName, inactiveClassName, currentSlide } = this.props;
+    const { activeClassName, inactiveClassName, currentSlide, infinite } = this.props;
 
-    const className = currentSlide === 0 ? inactiveClassName : activeClassName;
+    const className = currentSlide === 0 && infinite === false ? inactiveClassName : activeClassName;
     const style = className !== '' ? null : {
       width: 0,
       height: 0,
@@ -37,24 +35,24 @@ class LeftArrow extends Component {
 
 class RightArrow extends Component {
   static propTypes = {
-    handleClick: PropTypes.func.isRequired,
-    currentSlide: PropTypes.number.isRequired,
-    activeClassName: PropTypes.string.isRequired,
-    inactiveClassName: PropTypes.string.isRequired
+    handleClick: PropTypes.func,
+    currentSlide: PropTypes.number,
+    activeClassName: PropTypes.string,
+    inactiveClassName: PropTypes.string,
+    infinite: PropTypes.bool,
+    slideCount: PropTypes.number
   }
 
-  // HACK for propsTypes handleClick, currentSlide
   static defaultProps = {
-    handleClick: () => {},
     activeClassName: '',
-    inactiveClassName: '',
-    currentSlide: 0
+    inactiveClassName: ''
   }
 
   render() {
     const { activeClassName, inactiveClassName, currentSlide } = this.props;
+    const { infinite, slideCount } = this.props;
 
-    const className = currentSlide === 0 ? inactiveClassName : activeClassName;
+    const className = (currentSlide + 1) === slideCount && infinite === false ? inactiveClassName : activeClassName;
     const style = className !== '' ? null : {
       width: 0,
       height: 0,
