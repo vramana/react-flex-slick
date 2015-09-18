@@ -3,23 +3,12 @@ import React, { Component, PropTypes, Children, cloneElement } from 'react';
 class Page extends Component {
   static propTypes = {
     children: PropTypes.any,
-    vertical: PropTypes.bool.isRequired,
-    count: PropTypes.number.isRequired,
-    className: PropTypes.string.isRequired
+    className: PropTypes.string.isRequired,
+    pageStyle: PropTypes.any
   }
 
   render() {
-    // TODO Move this repetive calculation to Track
-    const { count, vertical, className } = this.props;
-    const pageWidth = vertical ? '100%' : `${100 / count}%`;
-    const pageHeight = vertical ? `${100 / count}%` : '100%';
-    const pageStyle = {
-      width: pageWidth,
-      height: pageHeight,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    };
+    const { pageStyle, className } = this.props;
 
     return (
       <div className={className} style={pageStyle}>
@@ -55,12 +44,12 @@ class Track extends Component {
     });
   }
 
-  render() {
-    const { vertical, currentSlide, pageClass, infinite,
+  computeTrackStyle() {
+    const { vertical, currentSlide, infinite,
             transitionSpeed, transitionTimingFn } = this.props;
-    const { previousSlide } = this.state;
     const slideCount = Children.count(this.props.children);
     const totalCount = slideCount + (infinite === true ? 2 : 0);
+    const { previousSlide } = this.state;
     const preSlideCount = infinite === true ? 1 : 0;
 
     const trackWidth = vertical ? '100%' : `${100 * totalCount}%`;
@@ -84,19 +73,49 @@ class Track extends Component {
       transition: trackTransition
     };
 
+    return trackStyle;
+  }
+
+  computePageStyle() {
+    const { vertical, infinite } = this.props;
+
+    const slideCount = Children.count(this.props.children);
+    const totalCount = slideCount + (infinite === true ? 2 : 0);
+
+    const pageWidth = vertical ? '100%' : `${100 / totalCount}%`;
+    const pageHeight = vertical ? `${100 / totalCount}%` : '100%';
+    const pageStyle = {
+      width: pageWidth,
+      height: pageHeight,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    };
+
+    return pageStyle;
+  }
+
+  render() {
+    const { pageClass, infinite } = this.props;
+    const slideCount = Children.count(this.props.children);
+    const totalCount = slideCount + (infinite === true ? 2 : 0);
+
+    const trackStyle = this.computeTrackStyle();
+    const pageStyle = this.computePageStyle();
+
     const slides = Children.map(this.props.children, (child, i) =>
-      <Page count={totalCount} vertical={vertical} className={pageClass} >
+      <Page pageStyle={pageStyle} className={pageClass} >
         {cloneElement(child, { key: i })}
       </Page>
     );
 
     const preSlides = slideCount === 1 || infinite === false ? null :
-      <Page count={totalCount} vertical={vertical} className={pageClass} pre >
+      <Page pageStyle={pageStyle} className={pageClass} pre >
         {cloneElement(this.props.children[slideCount - 1], { key: -1 })}
       </Page>;
 
     const postSlides = slideCount === 1 || infinite === false ? null :
-      <Page count={totalCount} vertical={vertical} className={pageClass} post >
+      <Page pageStyle={pageStyle} className={pageClass} post >
         {cloneElement(this.props.children[0], { key: totalCount })}
       </Page>;
 
