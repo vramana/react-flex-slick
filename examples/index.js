@@ -6,31 +6,56 @@ class App extends Component {
   render() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ width: 500, height: 200 }}>
-          <Simple />
+        <div>
+          <h1>Non Infinite</h1>
+          <NonInfinite width={500} height={150} />
+        </div>
+        <div>
+          <h1>Infinite</h1>
+          <Infinite width={500} height={150} />
         </div>
       </div>
     );
   }
 }
 
+const slideStyle = {
+  width: 400,
+  height: 125,
+  backgroundColor: 'slateblue',
+  color: 'white',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center'
+};
 
-class Simple extends Component {
+class NonInfinite extends Component {
 
   render() {
-    const slideStyle = {
-      width: 400,
-      height: 125,
-      backgroundColor: 'teal',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    };
-
     return (
-      <Slider currentSlide={0}>
+      <Slider>
         <LeftArrow />
-        <Slides>
+        <Slides {...this.props}>
+          <div style={slideStyle}><h1>1</h1></div>
+          <div style={slideStyle}><h1>2</h1></div>
+          <div style={slideStyle}><h1>3</h1></div>
+          <div style={slideStyle}><h1>4</h1></div>
+          <div style={slideStyle}><h1>5</h1></div>
+          <div style={slideStyle}><h1>6</h1></div>
+        </Slides>
+        <RightArrow />
+      </Slider>
+    );
+  }
+}
+
+class Infinite extends Component {
+
+  render() {
+    return (
+      <Slider infinite >
+        <LeftArrow />
+        <Slides {...this.props}>
           <div style={slideStyle}><h1>1</h1></div>
           <div style={slideStyle}><h1>2</h1></div>
           <div style={slideStyle}><h1>3</h1></div>

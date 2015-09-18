@@ -5,6 +5,7 @@ class Slider extends Component {
     children: PropTypes.any,
     initialSlide: PropTypes.number,
     currentSlide: PropTypes.number,
+    infinite: PropTypes.bool,
     vertical: PropTypes.bool,
     transitionSpeed: PropTypes.number,
     transitionTimingFn: PropTypes.string
@@ -14,7 +15,8 @@ class Slider extends Component {
     initialSlide: 0,
     vertical: false,
     transitionSpeed: 500,
-    transitionTimingFn: 'ease'
+    transitionTimingFn: 'ease',
+    infinite: false
   }
 
   /**
@@ -50,24 +52,38 @@ class Slider extends Component {
    */
   handleSlideShift(delta) {
     const { currentSlide, animating } = this.state;
-    const { transitionSpeed } = this.props;
-    if (animating || delta === 0) {
+    const { transitionSpeed, infinite } = this.props;
+    if (animating === true || delta === 0) {
       return;
     }
 
     const slides = this.props.children[1];
     const slideCount = Children.count(slides.props.children);
 
+    let newNextSlide;
+    if (infinite === true) {
+      if (currentSlide + 1 === slideCount && delta > 0) {
+        newNextSlide = 0;
+      } else if (currentSlide === 0 && delta < 0) {
+        newNextSlide = slideCount - 1;
+      }
+    }
+
     // EndEventListeners are not reliable. So,we use setTimeout
     // See react 0.14.0-rc1 blog post.
     this.transitionEndCallback = () => {
       this.setState({
+        currentSlide: newNextSlide === undefined ? currentSlide + delta : newNextSlide,
         animating: false
       });
       delete this.transitionEndCallback;
     };
 
-    if ((delta < 0 && currentSlide > 0) || (delta > 0 && currentSlide + 1 < slideCount)) {
+    const nonInfiniteCondition =
+      infinite === false &&
+      ((delta < 0 && currentSlide > 0) || (delta > 0 && currentSlide + 1 < slideCount));
+
+    if (nonInfiniteCondition || infinite === true) {
       this.setState({
         currentSlide: currentSlide + delta,
         animating: true
@@ -78,7 +94,7 @@ class Slider extends Component {
   }
 
   render() {
-    const { children, transitionSpeed, transitionTimingFn, vertical } = this.props;
+    const { children, transitionSpeed, transitionTimingFn, vertical, infinite } = this.props;
     const [ leftArrow, slides, rightArrow ] = children;
     const { currentSlide } = this.state;
 
@@ -98,6 +114,7 @@ class Slider extends Component {
     const newSlides = cloneElement(slides, {
       key: 1,
       currentSlide,
+      infinite,
       transitionSpeed,
       transitionTimingFn,
       vertical

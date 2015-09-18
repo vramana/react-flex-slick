@@ -25,7 +25,7 @@ class LeftArrow extends Component {
       height: 0,
       borderBottom: 'solid 30px transparent',
       borderTop: 'solid 30px transparent',
-      borderRight: 'solid 40px skyblue'
+      borderRight: 'solid 40px #795548'
     };
 
     return (
@@ -60,7 +60,7 @@ class RightArrow extends Component {
       height: 0,
       borderBottom: 'solid 30px transparent',
       borderTop: 'solid 30px transparent',
-      borderLeft: 'solid 40px skyblue'
+      borderLeft: 'solid 40px #795548'
     };
 
     return (
