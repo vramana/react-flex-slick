@@ -27,20 +27,10 @@ class Slider extends Component {
     };
   }
 
-  /**
-   * Go the next slide
-   * @method
-   */
-  next = () => {
-    this.handleSlideShift(1);
-  }
-
-  /**
-   * Go the previous slide
-   * @method
-   */
-  previous = () => {
-    this.handleSlideShift(-1);
+  componentWillUnmount() {
+    if (this.transitionEndCallback) {
+      clearTimeout(this.transitionEndCallback);
+    }
   }
 
   /**
@@ -85,16 +75,17 @@ class Slider extends Component {
 
     const newLeftArrow = cloneElement(leftArrow, {
       key: 0,
-      handleClick: () => { this.previous(); },
+      handleClick: () => { this.handleSlideShift(-1); },
       currentSlide
     });
 
     const newRightArrow = cloneElement(rightArrow, {
       key: 2,
-      handleClick: () => { this.next(); },
+      handleClick: () => { this.handleSlideShift(1); },
       currentSlide
     });
 
+    // TODO Show a warning if transitionSpeed prop is declared on Slides.
     const newSlides = cloneElement(slides, {
       key: 1,
       currentSlide,

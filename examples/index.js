@@ -4,6 +4,20 @@ import { Slider, Slides, LeftArrow, RightArrow } from '../src';
 
 class App extends Component {
   render() {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ width: 500, height: 200 }}>
+          <Simple />
+        </div>
+      </div>
+    );
+  }
+}
+
+
+class Simple extends Component {
+
+  render() {
     const slideStyle = {
       width: 400,
       height: 125,
@@ -12,7 +26,6 @@ class App extends Component {
       justifyContent: 'center',
       alignItems: 'center'
     };
-
 
     return (
       <Slider>
