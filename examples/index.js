@@ -28,7 +28,7 @@ class Simple extends Component {
     };
 
     return (
-      <Slider>
+      <Slider currentSlide={0}>
         <LeftArrow />
         <Slides>
           <div style={slideStyle}><h1>1</h1></div>

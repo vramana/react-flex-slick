@@ -23,13 +23,13 @@ class Slider extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      currentSlide: props.currentSlide ? props.currentSlide : props.initialSlide,
+      currentSlide: props.currentSlide !== undefined ? props.currentSlide : props.initialSlide,
       animating: false
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentSlide && nextProps.currentSlide !== this.state.currentSlide) {
+    if (nextProps.currentSlide !== undefined && nextProps.currentSlide !== this.state.currentSlide) {
       this.setState({
         currentSlide: nextProps.currentSlide
       });
