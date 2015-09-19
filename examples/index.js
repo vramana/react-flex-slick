@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Slider, Slides, LeftArrow, RightArrow } from '../src';
+import { Slider, Slides, PrevArrow, NextArrow } from '../src';
 
 import './index.css';
 
@@ -17,7 +17,7 @@ class App extends Component {
           <Infinite width={450} height={150} />
         </div>
         <div>
-          <h2>Custom Arrows</h2>
+          <h2>Custom Arrow</h2>
           <CustomArrows width={450} height={150} />
         </div>
       </div>
@@ -40,7 +40,7 @@ class NonInfinite extends Component {
   render() {
     return (
       <Slider>
-        <LeftArrow activeClassName="non-infinite-left--active"
+        <PrevArrow activeClassName="non-infinite-left--active"
                    inactiveClassName="non-infinite-left--inactice" />
         <Slides {...this.props}>
           <div style={slideStyle}><h1>1</h1></div>
@@ -50,7 +50,7 @@ class NonInfinite extends Component {
           <div style={slideStyle}><h1>5</h1></div>
           <div style={slideStyle}><h1>6</h1></div>
         </Slides>
-        <RightArrow activeClassName="non-infinite-right--active"
+        <NextArrow activeClassName="non-infinite-right--active"
                     inactiveClassName="non-infinite-right--inactice" />
       </Slider>
     );
@@ -62,7 +62,7 @@ class Infinite extends Component {
   render() {
     return (
       <Slider infinite >
-        <LeftArrow />
+        <PrevArrow />
         <Slides {...this.props}>
           <div style={slideStyle}><h1>1</h1></div>
           <div style={slideStyle}><h1>2</h1></div>
@@ -71,7 +71,7 @@ class Infinite extends Component {
           <div style={slideStyle}><h1>5</h1></div>
           <div style={slideStyle}><h1>6</h1></div>
         </Slides>
-        <RightArrow />
+        <NextArrow />
       </Slider>
     );
   }

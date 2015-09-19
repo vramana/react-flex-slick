@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-class LeftArrow extends Component {
+class PrevArrow extends Component {
   static propTypes = {
     handleClick: PropTypes.func,
     currentSlide: PropTypes.number,
@@ -33,7 +33,7 @@ class LeftArrow extends Component {
   }
 }
 
-class RightArrow extends Component {
+class NextArrow extends Component {
   static propTypes = {
     handleClick: PropTypes.func,
     currentSlide: PropTypes.number,
@@ -67,5 +67,4 @@ class RightArrow extends Component {
   }
 }
 
-
-export { LeftArrow, RightArrow };
+export { PrevArrow, NextArrow };
