@@ -16,6 +16,10 @@ class App extends Component {
           <h2>Infinite</h2>
           <Infinite width={450} height={150} />
         </div>
+        <div>
+          <h2>Custom Arrows</h2>
+          <CustomArrows width={450} height={150} />
+        </div>
       </div>
     );
   }
@@ -68,6 +72,26 @@ class Infinite extends Component {
           <div style={slideStyle}><h1>6</h1></div>
         </Slides>
         <RightArrow />
+      </Slider>
+    );
+  }
+}
+
+class CustomArrows extends Component {
+
+  render() {
+    return (
+      <Slider infinite >
+        <button>Prev</button>
+        <Slides {...this.props}>
+          <div style={slideStyle}><h1>1</h1></div>
+          <div style={slideStyle}><h1>2</h1></div>
+          <div style={slideStyle}><h1>3</h1></div>
+          <div style={slideStyle}><h1>4</h1></div>
+          <div style={slideStyle}><h1>5</h1></div>
+          <div style={slideStyle}><h1>6</h1></div>
+        </Slides>
+        <button>Next</button>
       </Slider>
     );
   }

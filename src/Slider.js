@@ -102,9 +102,12 @@ class Slider extends Component {
     const slideCount = Children.count(slides.props.children);
     const { beforeChange, afterChange } = this.props;
 
+    // onClick is passed as a props so that dom elements can be custom arrows
+
     const newLeftArrow = cloneElement(leftArrow, {
       key: 0,
       handleClick: () => { this.handleSlideShift(-1); },
+      onClick: () => { this.handleSlideShift(-1); },
       currentSlide,
       infinite
     });
@@ -113,6 +116,7 @@ class Slider extends Component {
     const newRightArrow = cloneElement(rightArrow, {
       key: 2,
       handleClick: () => { this.handleSlideShift(1); },
+      onClick: () => { this.handleSlideShift(1); },
       currentSlide,
       infinite,
       slideCount

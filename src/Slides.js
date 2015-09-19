@@ -3,7 +3,7 @@ import React, { Component, PropTypes, Children, cloneElement } from 'react';
 class Page extends Component {
   static propTypes = {
     children: PropTypes.any,
-    className: PropTypes.string.isRequired,
+    className: PropTypes.string,
     pageStyle: PropTypes.any
   }
 
@@ -41,8 +41,10 @@ class Track extends Component {
 
   componentWillReceiveProps() {
     // TODO May be move this to Slider
+    const { currentSlide } = this.props;
+    const { previousSlide } = this.state;
     this.setState({
-      previousSlide: this.props.currentSlide
+      previousSlide: previousSlide !== currentSlide ? currentSlide : previousSlide
     });
   }
 

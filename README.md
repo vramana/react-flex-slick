@@ -32,6 +32,38 @@ To run the examples:
 - Documentation
 - Tests
 
+## Comparision with Slick
+
+### Settings
+
+- cssEase - transitionTimingFn
+- arrows - Alternate way: Instead of arrows pass empty `<div>` to the Slider
+- appendArrows, appendDots - Not supported due the architecture of component
+- mobileFirst - Alternate way: Control the size of Slider just usign css on the parent class
+- leftArrow, rightArrow - Alternate way: Just put a ref on leftArrow and rightArrow
+- infinite - works as expected
+- initialSlide - works as expected
+- rows - Alternate way: Pass pages of slides instead of slides.
+- speed - transitionSpeed
+- vertical - works as expected
+
+**Progress** - Total: 43 Current:
+
+### Events
+
+- beforeChange - `beforeChange(prevSlide, currSlide)` but doesn't have the event handler
+- afterChange - `afterChange(prevSlide, currSlide)` but doesn't have the event handler
+- destroy - Alternate way: Can be invoke in parent components lifecycle methods when the slider is taken out of the render tree.
+- init, reInit - Alternate way: Can be invoke in parent components lifecycle methods.
+- setPosition - Not positions are calculated from the DOM. So, doesn't make sense.
+
+### Methods
+
+No slick method will be supported because the encourage anti-patterns in react i.e, changing
+the state of child component via a parent component directly or indirectly using setState.
+You can add all this by passing props to the Slider component. Detailed examples will be written
+showing how.
+
 ## Inspiration
 
 - [Slick Carousel][slick]
