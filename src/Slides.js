@@ -25,9 +25,11 @@ class Track extends Component {
     infinite: PropTypes.bool.isRequired,
     vertical: PropTypes.bool.isRequired,
     currentSlide: PropTypes.number.isRequired,
-    pageClass: PropTypes.string.isRequired,
+    pageClass: PropTypes.string,
     transitionSpeed: PropTypes.number.isRequired,
-    transitionTimingFn: PropTypes.string.isRequired
+    transitionTimingFn: PropTypes.string.isRequired,
+    beforeChange: PropTypes.func,
+    afterChange: PropTypes.func
   }
 
   constructor(props, context) {
@@ -44,6 +46,18 @@ class Track extends Component {
     });
   }
 
+  componentWillUpdate() {
+    if (this.props.beforeChange !== undefined) {
+      this.props.beforeChange(this.state.previousSlide, this.props.currentSlide);
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.afterChange !== undefined) {
+      this.props.afterChange(this.state.previousSlide, this.props.currentSlide);
+    }
+  }
+
   computeTrackStyle() {
     const { vertical, currentSlide, infinite,
             transitionSpeed, transitionTimingFn } = this.props;
@@ -58,8 +72,8 @@ class Track extends Component {
     const translateY = vertical ? (100 * (currentSlide + preSlideCount)) / totalCount : 0;
     const trackTransform = `translate3d(${-translateX}%, ${-translateY}%, 0)`;
     const trackTransition =
-      (previousSlide === -1 && (currentSlide === slideCount - 1)) ||
-      ((previousSlide === slideCount) && currentSlide === 0) ? '' :
+      (infinite === true && ((previousSlide === -1 && (currentSlide === slideCount - 1)) ||
+      ((previousSlide === slideCount) && currentSlide === 0))) ? '' :
       `all ${transitionSpeed}ms ${transitionTimingFn}`;
     const flexDirection = vertical ? 'column' : 'row';
 
@@ -139,18 +153,20 @@ class Slides extends Component {
     vertical: PropTypes.bool,
     pageClass: PropTypes.string,
     transitionSpeed: PropTypes.number,
-    transitionTimingFn: PropTypes.string
+    transitionTimingFn: PropTypes.string,
+    beforeChange: PropTypes.func,
+    afterChange: PropTypes.func
   }
 
   static defaultProps = {
     width: 0,
-    height: 0,
-    pageClass: ''
+    height: 0
   }
 
   render() {
     const { width, height, vertical, currentSlide, pageClass,
             infinite, transitionSpeed, transitionTimingFn } = this.props;
+    const { beforeChange, afterChange } = this.props;
 
     const containerWidth = width === 0 ? '100%' : width;
     const containerHeight = height === 0 ? '100%' : height;
@@ -167,6 +183,8 @@ class Slides extends Component {
                vertical={vertical}
                currentSlide={currentSlide}
                pageClass={pageClass}
+               beforeChange={beforeChange}
+               afterChange={afterChange}
                transitionSpeed={transitionSpeed}
                transitionTimingFn={transitionTimingFn} >
           {this.props.children}

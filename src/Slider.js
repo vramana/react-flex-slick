@@ -8,7 +8,9 @@ class Slider extends Component {
     infinite: PropTypes.bool,
     vertical: PropTypes.bool,
     transitionSpeed: PropTypes.number,
-    transitionTimingFn: PropTypes.string
+    transitionTimingFn: PropTypes.string,
+    beforeChange: PropTypes.func,
+    afterChange: PropTypes.func
   }
 
   static defaultProps = {
@@ -98,6 +100,7 @@ class Slider extends Component {
     const [ leftArrow, slides, rightArrow ] = children;
     const { currentSlide } = this.state;
     const slideCount = Children.count(slides.props.children);
+    const { beforeChange, afterChange } = this.props;
 
     const newLeftArrow = cloneElement(leftArrow, {
       key: 0,
@@ -122,7 +125,9 @@ class Slider extends Component {
       infinite,
       transitionSpeed,
       transitionTimingFn,
-      vertical
+      vertical,
+      beforeChange,
+      afterChange
     });
 
     return (
