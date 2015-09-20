@@ -49,10 +49,10 @@ To run the examples:
 - slidesPerRow - Alternate Way: Pass pages of slides instead of slides
 - vertical - works as expected
 - swipe, verticalSwiping - merged into swipe - works as expected
-- touchMove - coming soon
-- draggable - works as expected,
+- touchMove - works as expected
+- draggable - works as expected
 - edgeFriction - works as expected
-- touchThreshold - fraction by which you should slide for slide to change - works as expected
+- touchThreshold - fraction by which you should slide for slide to change - lies between 0 and 1 
 - swipeEvent - works as expected
 - edgeEvent - works as expected
 - zIndex - Not supported: No support for IE 9 itself requires atleast IE11

@@ -18,7 +18,8 @@ class Slider extends Component {
     edgeFriction: PropTypes.number,
     touchThreshold: PropTypes.number,
     edgeEvent: PropTypes.func,
-    swipeEvent: PropTypes.func
+    swipeEvent: PropTypes.func,
+    touchMove: PropTypes.bool
   }
   // May be move most of the props from here to Slider. and copy them to state while
   // componentWillMount
@@ -32,7 +33,8 @@ class Slider extends Component {
     draggable: false,
     infinite: false,
     edgeFriction: 0.35,
-    touchThreshold: 5
+    touchThreshold: 0.2,
+    touchMove: true
   }
 
   /**
@@ -129,7 +131,7 @@ class Slider extends Component {
     const sliderRect = slider.getBoundingClientRect();
     const trackRect = slider.children[1].children[0].getBoundingClientRect();
     const maxSwipeLength = vertical === false ? trackRect.width : trackRect.height;
-    const minSwipe = (vertical === false ? sliderRect.width : sliderRect.height) / touchThreshold;
+    const minSwipe = (vertical === false ? sliderRect.width : sliderRect.height) * touchThreshold;
 
     this.setState({
       swiping: true,
@@ -152,7 +154,7 @@ class Slider extends Component {
       return;
     }
 
-    const { infinite, edgeEvent, children, swipeEvent, vertical } = this.props;
+    const { infinite, edgeEvent, children, swipeEvent, vertical, touchMove } = this.props;
     const { touchObject, currentSlide } = this.state;
 
     touchObject.currY = e.touches !== undefined ? e.touches[0].pageY : e.clientY;
@@ -190,9 +192,9 @@ class Slider extends Component {
       touchObject.swipeEventFired = true;
     }
 
-    const translateXOffset = vertical === false ?
+    const translateXOffset = vertical === false && touchMove === true ?
       ((touchObject.currX - touchObject.startX) * 100 * edgeFriction) / touchObject.maxSwipeLength : 0;
-    const translateYOffset = vertical === true ?
+    const translateYOffset = vertical === true && touchMove === true ?
       ((touchObject.currY - touchObject.startY) * 100 * edgeFriction) / touchObject.maxSwipeLength : 0;
 
     this.setState({
