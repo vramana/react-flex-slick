@@ -18,6 +18,12 @@ class Page extends Component {
   }
 }
 
+// TODO Possible PERF OPTIMIZATION remove translateXOffset and translateYOffset from
+// here and do imperative DOM operations (translate) inside Slider.
+
+// This is posibly blocked until the above todo.
+// Implement shouldComponentUpdate so that setTimeout state change only effects
+// on the edge. May be have an edge key inside state??
 class Track extends Component {
 
   static propTypes = {
@@ -29,7 +35,9 @@ class Track extends Component {
     transitionSpeed: PropTypes.number.isRequired,
     transitionTimingFn: PropTypes.string.isRequired,
     beforeChange: PropTypes.func,
-    afterChange: PropTypes.func
+    afterChange: PropTypes.func,
+    translateXOffset: PropTypes.number,
+    translateYOffset: PropTypes.number
   }
 
   constructor(props, context) {
@@ -62,6 +70,7 @@ class Track extends Component {
 
   computeTrackStyle() {
     const { vertical, currentSlide, infinite,
+            translateXOffset, translateYOffset,
             transitionSpeed, transitionTimingFn } = this.props;
     const slideCount = Children.count(this.props.children);
     const totalCount = slideCount + (infinite === true ? 2 : 0);
@@ -70,12 +79,14 @@ class Track extends Component {
 
     const trackWidth = vertical ? '100%' : `${100 * totalCount}%`;
     const trackHeight = vertical ? `${100 * totalCount}%` : '100%';
-    const translateX = vertical ? 0 : (100 * (currentSlide + preSlideCount)) / totalCount;
-    const translateY = vertical ? (100 * (currentSlide + preSlideCount)) / totalCount : 0;
+    const translate = (100 * (currentSlide + preSlideCount)) / totalCount;
+    const translateX = vertical === false ? translate - translateXOffset : 0;
+    const translateY = vertical === true ? translate - translateYOffset : 0;
     const trackTransform = `translate3d(${-translateX}%, ${-translateY}%, 0)`;
     const trackTransition =
-      (infinite === true && ((previousSlide === -1 && (currentSlide === slideCount - 1)) ||
-      ((previousSlide === slideCount) && currentSlide === 0))) ? '' :
+      infinite === true && ((previousSlide === -1 && (currentSlide === slideCount - 1)) ||
+      ((previousSlide === slideCount) && currentSlide === 0)) ||
+      (translateXOffset !== 0 || translateYOffset !== 0) ? '' :
       `all ${transitionSpeed}ms ${transitionTimingFn}`;
     const flexDirection = vertical ? 'column' : 'row';
 
@@ -157,7 +168,9 @@ class Slides extends Component {
     transitionSpeed: PropTypes.number,
     transitionTimingFn: PropTypes.string,
     beforeChange: PropTypes.func,
-    afterChange: PropTypes.func
+    afterChange: PropTypes.func,
+    translateXOffset: PropTypes.number,
+    translateYOffset: PropTypes.number
   }
 
   static defaultProps = {
@@ -166,9 +179,7 @@ class Slides extends Component {
   }
 
   render() {
-    const { width, height, vertical, currentSlide, pageClass,
-            infinite, transitionSpeed, transitionTimingFn } = this.props;
-    const { beforeChange, afterChange } = this.props;
+    const { width, height, children, ...props } = this.props;
 
     const containerWidth = width === 0 ? '100%' : width;
     const containerHeight = height === 0 ? '100%' : height;
@@ -181,14 +192,7 @@ class Slides extends Component {
 
     return (
       <div style={containerStyle}>
-        <Track infinite={infinite}
-               vertical={vertical}
-               currentSlide={currentSlide}
-               pageClass={pageClass}
-               beforeChange={beforeChange}
-               afterChange={afterChange}
-               transitionSpeed={transitionSpeed}
-               transitionTimingFn={transitionTimingFn} >
+        <Track {...props} >
           {this.props.children}
         </Track>
       </div>

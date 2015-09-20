@@ -5,20 +5,21 @@ import { Slider, Slides, PrevArrow, NextArrow } from '../src';
 import './index.css';
 
 class App extends Component {
+
   render() {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
         <div>
           <h2>Non Infinite</h2>
-          <NonInfinite width={450} height={150} />
+          <NonInfinite width={580} height={150} />
         </div>
         <div>
           <h2>Infinite</h2>
-          <Infinite width={450} height={150} />
+          <Infinite width={580} height={150} />
         </div>
         <div>
           <h2>Custom Arrow</h2>
-          <CustomArrows width={450} height={150} />
+          <CustomArrows width={580} height={150} />
         </div>
       </div>
     );
@@ -26,7 +27,7 @@ class App extends Component {
 }
 
 const slideStyle = {
-  width: 400,
+  width: 540,
   height: 125,
   backgroundColor: 'slateblue',
   color: 'white',
