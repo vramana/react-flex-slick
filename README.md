@@ -5,7 +5,7 @@ This is library aims to replace [react-slick][react-slick].
 
 Uses **flexbox** exclusively, so no support for older browsers :cry: :cry:
 
-On the bright side, it is extremly flexible. Currently it supports `>=react-0.13`
+On the bright side, it is extremly flexible. Currently it supports `>=react-0.14` including rc's
 
 Any questions?? Join here [![react-flex-slick on slack](https://img.shields.io/badge/slack-react--flex--slick%40reactiflux-61DAFB.svg?style=flat-square)](http://www.reactiflux.com)
 
@@ -52,20 +52,23 @@ To run the examples:
 - touchMove - works as expected
 - draggable - works as expected
 - edgeFriction - works as expected
-- touchThreshold - fraction by which you should slide for slide to change - lies between 0 and 1 
-- swipeEvent - works as expected
-- edgeEvent - works as expected
+- touchThreshold - fraction by which you should slide for slide to change - lies between 0 and 1
 - zIndex - Not supported: No support for IE 9 itself requires atleast IE11
 
-**Progress** - Total: 43 Current: 23
+**Progress** - Total: 43 Current: 21
 
 ### Events
 
 - beforeChange - `beforeChange(prevSlide, currSlide)` but doesn't have the event handler
 - afterChange - `afterChange(prevSlide, currSlide)` but doesn't have the event handler
-- destroy - Alternate way: Can be invoke in parent components lifecycle methods when the slider is taken out of the render tree.
+- swipeEvent - `swipeEvent(direction)` but doesn't have the event handler
+- edgeEvent - `edgeEvent(direction)` but doesn't have the event handler
 - init, reInit - Alternate way: Can be invoke in parent components lifecycle methods.
+- destroy - Alternate way: Can be invoke in parent components lifecycle methods when the slider is taken out of the render tree.
 - setPosition - Not positions are calculated from the DOM. So, doesn't make sense.
+- breakpoint - Not implemented yet
+
+**Progress** - Total: 9 Current: 8
 
 ### Methods
 

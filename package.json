@@ -50,6 +50,6 @@
     "webpack-hot-middleware": "^2.2.0"
   },
   "peerDependencies": {
-    "react": ">=0.13 || ^0.14.0-alpha"
+    "react": ">=0.14 || ^0.14.0-alpha"
   }
 }
