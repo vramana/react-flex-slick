@@ -28,8 +28,8 @@ class Slider extends Component {
     vertical: false,
     transitionSpeed: 500,
     transitionTimingFn: 'ease',
-    swipe: true,
-    draggable: true,
+    swipe: false,
+    draggable: false,
     infinite: false,
     edgeFriction: 0.35,
     touchThreshold: 5

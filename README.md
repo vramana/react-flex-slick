@@ -36,7 +36,9 @@ To run the examples:
 
 ### Settings
 
-- cssEase - transitionTimingFn
+- cssEase - renamed to transitionTimingFn
+- speed - renamed to transitionSpeed
+- easing - Not supported: Minimum browser support ensure CSS Transistions are present.
 - arrows - Alternate way: Instead of arrows pass empty `<div>` to the Slider
 - appendArrows, appendDots - Not supported due the architecture of component
 - mobileFirst - Alternate way: Control the size of Slider just usign css on the parent class
@@ -44,10 +46,18 @@ To run the examples:
 - infinite - works as expected
 - initialSlide - works as expected
 - rows - Alternate way: Pass pages of slides instead of slides.
-- speed - transitionSpeed
+- slidesPerRow - Alternate Way: Pass pages of slides instead of slides
 - vertical - works as expected
+- swipe, verticalSwiping - merged into swipe - works as expected
+- touchMove - coming soon
+- draggable - works as expected,
+- edgeFriction - works as expected
+- touchThreshold - fraction by which you should slide for slide to change - works as expected
+- swipeEvent - works as expected
+- edgeEvent - works as expected
+- zIndex - Not supported: No support for IE 9 itself requires atleast IE11
 
-**Progress** - Total: 43 Current:
+**Progress** - Total: 43 Current: 23
 
 ### Events
 

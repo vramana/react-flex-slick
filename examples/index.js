@@ -11,15 +11,15 @@ class App extends Component {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
         <div>
           <h2>Non Infinite</h2>
-          <NonInfinite width={580} height={150} />
+          <NonInfinite width={580} height={150} swipe draggable />
         </div>
         <div>
           <h2>Infinite</h2>
-          <Infinite width={580} height={150} />
+          <Infinite width={580} height={150} swipe draggable />
         </div>
         <div>
           <h2>Custom Arrow</h2>
-          <CustomArrows width={580} height={150} />
+          <CustomArrows width={580} height={150} swipe draggable />
         </div>
       </div>
     );
