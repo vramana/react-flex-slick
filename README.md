@@ -20,10 +20,14 @@ To run the examples:
 ## What works
 
 - Infinite and Non-infinite Mode
+- Pages
 - Horizontal and Vertical Sliding
 - Multiple Slides per page (slidesToScroll = slidesToShow)
 - Left and Right Arrows to go back and forth
 - Arrows have active and inactive classes.
+- Custom Arrows
+- **Touch Scrolling/Mouse Dragging**
+- Edge Friction
 
 ## TODO
 
@@ -42,7 +46,7 @@ To run the examples:
 - arrows - Alternate way: Instead of arrows pass empty `<div>` to the Slider
 - appendArrows, appendDots - Not supported due the architecture of component
 - mobileFirst - Alternate way: Control the size of Slider just usign css on the parent class
-- leftArrow, rightArrow - Alternate way: Just put a ref on leftArrow and rightArrow
+- prevArrow, nextArrow - Alternate way: Just put a ref on prevArrow and nextArrow
 - infinite - works as expected
 - initialSlide - works as expected
 - rows - Alternate way: Pass pages of slides instead of slides.
