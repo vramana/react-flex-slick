@@ -11,15 +11,15 @@ class App extends Component {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
         <div>
           <h2>Non Infinite</h2>
-          <NonInfinite width={580} height={150} swipe draggable />
+          <NonInfinite width={580} height={150} />
         </div>
         <div>
           <h2>Infinite</h2>
-          <Infinite width={580} height={150} swipe draggable />
+          <Infinite width={580} height={150} />
         </div>
         <div>
           <h2>Custom Arrow</h2>
-          <CustomArrows width={580} height={150} swipe draggable />
+          <CustomArrows width={580} height={150} />
         </div>
       </div>
     );
@@ -40,7 +40,7 @@ class NonInfinite extends Component {
 
   render() {
     return (
-      <Slider>
+      <Slider swipe draggable >
         <PrevArrow activeClassName="non-infinite-left--active"
                    inactiveClassName="non-infinite-left--inactice" />
         <Slides {...this.props}>
@@ -62,9 +62,9 @@ class Infinite extends Component {
 
   render() {
     return (
-      <Slider infinite >
+      <Slider infinite swipe draggable >
         <PrevArrow />
-        <Slides {...this.props}>
+        <Slides {...this.props}  >
           <div style={slideStyle}><h1>1</h1></div>
           <div style={slideStyle}><h1>2</h1></div>
           <div style={slideStyle}><h1>3</h1></div>
@@ -82,7 +82,7 @@ class CustomArrows extends Component {
 
   render() {
     return (
-      <Slider infinite >
+      <Slider infinite swipe draggable >
         <button>Prev</button>
         <Slides {...this.props}>
           <div style={slideStyle}><h1>1</h1></div>
