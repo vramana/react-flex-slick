@@ -12,7 +12,7 @@ const swipeDirection = touchObject => {
   const angle = (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
   if (angle < 45 && angle > -45) {
     return SWIPE_RIGHT;
-  } else if ((angle < 180 && angle > 135) || (angle < -135 && angle > -180)) {
+  } else if ((angle <= 180 && angle > 135) || (angle < -135 && angle > -180)) {
     return SWIPE_LEFT;
   } else if (angle > 45 && angle < 135 ) {
     return SWIPE_DOWN;
