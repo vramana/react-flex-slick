@@ -57,11 +57,8 @@ class Slider extends Component {
 
   componentDidMount() {
     if (this.props.autoPlay && this.props.infinite) {
-      this.autoPlayTransistionCallback = () => {
-        this.handleSlideShift(1);
-      };
-
-      setInterval(this.autoPlayTransistionCallback, this.props.autoPlaySpeed);
+      this.autoPlayTransistionCallback =
+        setInterval(() => { this.handleSlideShift(1); }, this.props.autoPlaySpeed);
     }
   }
 
@@ -73,6 +70,15 @@ class Slider extends Component {
 
     if (this.props.autoPlay && !autoPlay && this.autoPlayTransistionCallback) {
       clearInterval(this.autoPlayTransistionCallback);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { autoPlay } = prevProps;
+
+    if (this.props.autoPlay && !autoPlay && this.props.infinite) {
+      this.autoPlayTransistionCallback =
+        setInterval(() => { this.handleSlideShift(1); }, this.props.autoPlaySpeed);
     }
   }
 
@@ -112,6 +118,7 @@ class Slider extends Component {
 
     // EndEventListeners are not reliable. So,we use setTimeout
     // See react 0.14.0-rc1 blog post.
+    // FIXME PERFORMANCE BOTTLENECK
     this.transitionEndCallback = () => {
       this.setState({
         currentSlide: newNextSlide === undefined ? currentSlide + delta : newNextSlide,
@@ -218,6 +225,7 @@ class Slider extends Component {
     const translateYOffset = vertical === true && touchMove === true ?
       ((touchObject.currY - touchObject.startY) * 100 * edgeFriction) / touchObject.maxSwipeLength : 0;
 
+    // FIXME PERFORMANCE BOTTLENECK
     this.setState({
       touchObject: {...touchObject},
       translateXOffset,

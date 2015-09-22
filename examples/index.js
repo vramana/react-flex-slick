@@ -18,7 +18,7 @@ class App extends Component {
           <Infinite width={580} height={150} />
         </div>
         <div>
-          <h2>Custom Arrow</h2>
+          <h2>Custom arrows</h2>
           <CustomArrows width={580} height={150} />
         </div>
       </div>
@@ -40,7 +40,7 @@ class NonInfinite extends Component {
 
   render() {
     return (
-      <Slider currentSlide={2}>
+      <Slider>
         <PrevArrow activeClassName="non-infinite-left--active"
                    inactiveClassName="non-infinite-left--inactive" />
         <Slides {...this.props}>
