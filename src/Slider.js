@@ -55,16 +55,33 @@ class Slider extends Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.autoPlay && this.props.infinite) {
+      this.autoPlayTransistionCallback = () => {
+        this.handleSlideShift(1);
+      };
+
+      setInterval(this.autoPlayTransistionCallback, this.props.autoPlaySpeed);
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
-    const { currentSlide } = nextProps;
+    const { currentSlide, autoPlay } = nextProps;
     if (currentSlide !== undefined && currentSlide !== this.state.currentSlide) {
       this.setState({ currentSlide });
+    }
+
+    if (this.props.autoPlay && !autoPlay && this.autoPlayTransistionCallback) {
+      clearInterval(this.autoPlayTransistionCallback);
     }
   }
 
   componentWillUnmount() {
     if (this.transitionEndCallback) {
       clearTimeout(this.transitionEndCallback);
+    }
+    if (this.autoPlayTransistionCallback) {
+      clearInterval(this.autoPlayTransistionCallback);
     }
   }
 
