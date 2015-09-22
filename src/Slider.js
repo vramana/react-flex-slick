@@ -281,11 +281,15 @@ class Slider extends Component {
     const { children, vertical, infinite, swipe, draggable } = this.props;
     const { transitionSpeed, transitionTimingFn } = this.props;
     const { beforeChange, afterChange } = this.props;
-    const [ leftArrow, slides, rightArrow ] = children;
+    const [ leftArrow, slides, rightArrow, dots ] = children;
     const { currentSlide, translateXOffset, translateYOffset } = this.state;
     const slideCount = Children.count(slides.props.children);
 
     // onClick is passed as a props so that dom elements can be custom arrows
+    const newDots = cloneElement(dots, {
+      currentSlide,
+      slideCount
+    });
 
     const newLeftArrow = cloneElement(leftArrow, {
       key: 0,
@@ -330,10 +334,13 @@ class Slider extends Component {
     });
 
     return (
-      <div ref="slider" style={{ display: 'flex', alignItems: 'center'}}>
-        {newLeftArrow}
-        {newSlides}
-        {newRightArrow}
+      <div>
+        <div ref="slider" style={{ display: 'flex', alignItems: 'center'}}>
+          {newLeftArrow}
+          {newSlides}
+          {newRightArrow}
+        </div>
+        {newDots}
       </div>
     );
   }
