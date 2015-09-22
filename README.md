@@ -49,7 +49,7 @@ To run the examples:
 - prevArrow, nextArrow - Alternate way: Just put a ref on prevArrow and nextArrow
 - infinite - works as expected
 - initialSlide - works as expected
-- rows - Alternate way: Pass pages of slides instead of slides.
+- rows - Alternate way: Pass pages of slides instead of slides
 - slidesPerRow - Alternate Way: Pass pages of slides instead of slides
 - vertical - works as expected
 - swipe, verticalSwiping - merged into swipe - works as expected
@@ -57,9 +57,21 @@ To run the examples:
 - draggable - works as expected
 - edgeFriction - works as expected
 - touchThreshold - fraction by which you should slide for slide to change - lies between 0 and 1
+- autoPlay, autoPlaySpeed - works as expected. *Bonus*: If the mounted component with `autoPlay` recieve
+  `autoPlay={false}` then it will pause the slider.
 - zIndex - Not supported: No support for IE 9 itself requires atleast IE11
+- centerPadding - Alternate way: Use css on pages to manipulate this
+- customPaging - Alternate way: Just pass your slides in pages whatever way you want
+- waitForAnimate - This is the default behaviour of current slider. Otherwise behaviour
+  is not implemented yet.
+- useCSS - Not supported: We don't have to fallback for jQuery animations for ancient browsers
+  because we dont support them in first place.
 
-**Progress** - Total: 43 Current: 21
+**Remaining**: slidesToShow, slidesToScroll, accessibility, rtl, dots, dotClass,
+pauseOnHover, pauseOnDotsHover, responsive, swipeToSlide, slide, variableWidth,
+centerMode, fade, lazyLoad, respondTo
+
+**Progress** - Total: 43 Current: 27
 
 ### Events
 
