@@ -21,9 +21,9 @@ class Dots extends Component {
     }
     return(
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-      <ul style={{listStyle: 'none', margin: 0, padding: 0}}>
-        {dotElements}
-      </ul>
+        <ul style={{listStyle: 'none', margin: 0, padding: 0}}>
+          {dotElements}
+        </ul>
       </div>
     )
   }
