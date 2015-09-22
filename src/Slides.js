@@ -30,6 +30,8 @@ class Track extends Component {
     children: PropTypes.any,
     infinite: PropTypes.bool.isRequired,
     vertical: PropTypes.bool.isRequired,
+    swipe: PropTypes.bool.isRequired,
+    draggable: PropTypes.bool.isRequired,
     currentSlide: PropTypes.number.isRequired,
     pageClass: PropTypes.string,
     transitionSpeed: PropTypes.number.isRequired,
@@ -56,11 +58,22 @@ class Track extends Component {
     });
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { swipe, draggable } = this.props;
+
+    if (swipe === false && draggable === false) {
+      return this.state.previousSlide !== nextProps.currentSlide;
+    }
+
+    return true;
+  }
+
   componentWillUpdate() {
     if (this.props.beforeChange !== undefined) {
       this.props.beforeChange(this.state.previousSlide, this.props.currentSlide);
     }
   }
+
 
   componentDidUpdate() {
     if (this.props.afterChange !== undefined) {
@@ -164,9 +177,19 @@ class Slides extends Component {
     currentSlide: PropTypes.number,
     infinite: PropTypes.bool,
     vertical: PropTypes.bool,
+    swipe: PropTypes.bool,
+    draggable: PropTypes.bool,
     pageClass: PropTypes.string,
     transitionSpeed: PropTypes.number,
     transitionTimingFn: PropTypes.string,
+    onMouseDown: PropTypes.func,
+    onMouseMove: PropTypes.func,
+    onMouseUp: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+    onTouchStart: PropTypes.func,
+    onTouchMove: PropTypes.func,
+    onTouchEnd: PropTypes.func,
+    onTouchCancel: PropTypes.func,
     beforeChange: PropTypes.func,
     afterChange: PropTypes.func,
     translateXOffset: PropTypes.number,
@@ -179,7 +202,9 @@ class Slides extends Component {
   }
 
   render() {
-    const { width, height, children, ...props } = this.props;
+    const { width, height, children,
+      onMouseDown, onMouseMove, onMouseUp, onMouseLeave,
+      onTouchStart, onTouchMove, onTouchEnd, onTouchCancel, ...props } = this.props;
 
     const containerWidth = width === 0 ? '100%' : width;
     const containerHeight = height === 0 ? '100%' : height;
@@ -191,7 +216,15 @@ class Slides extends Component {
     };
 
     return (
-      <div style={containerStyle}>
+      <div style={containerStyle}
+           onMouseDown={onMouseDown}
+           onMouseMove={onMouseMove}
+           onMouseUp={onMouseUp}
+           onMouseLeave={onMouseLeave}
+           onTouchStart={onTouchStart}
+           onTouchMove={onTouchMove}
+           onTouchEnd={onTouchEnd}
+           onTouchCancel={onTouchCancel} >
         <Track {...props} >
           {this.props.children}
         </Track>

@@ -26,7 +26,7 @@ h2 {
   border-right: solid 40px #795548;
 }
 
-.non-infinite-left--inactice {
+.non-infinite-left--inactive {
   width: 0;
   height: 0;
   border-bottom: solid 30px transparent;
@@ -42,7 +42,7 @@ h2 {
   border-left: solid 40px #795548;
 }
 
-.non-infinite-right--inactice {
+.non-infinite-right--inactive {
   width: 0;
   height: 0;
   border-bottom: solid 30px transparent;

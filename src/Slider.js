@@ -19,7 +19,9 @@ class Slider extends Component {
     touchThreshold: PropTypes.number,
     edgeEvent: PropTypes.func,
     swipeEvent: PropTypes.func,
-    touchMove: PropTypes.bool
+    touchMove: PropTypes.bool,
+    autoPlay: PropTypes.bool,
+    autoPlaySpeed: PropTypes.number
   }
   // May be move most of the props from here to Slider. and copy them to state while
   // componentWillMount
@@ -34,7 +36,9 @@ class Slider extends Component {
     infinite: false,
     edgeFriction: 0.35,
     touchThreshold: 0.2,
-    touchMove: true
+    touchMove: true,
+    autoPlay: false,
+    autoPlaySpeed: 3000
   }
 
   /**
@@ -249,11 +253,12 @@ class Slider extends Component {
   }
 
   render() {
-    const { children, transitionSpeed, transitionTimingFn, vertical, infinite } = this.props;
+    const { children, vertical, infinite, swipe, draggable } = this.props;
+    const { transitionSpeed, transitionTimingFn } = this.props;
+    const { beforeChange, afterChange } = this.props;
     const [ leftArrow, slides, rightArrow ] = children;
     const { currentSlide, translateXOffset, translateYOffset } = this.state;
     const slideCount = Children.count(slides.props.children);
-    const { beforeChange, afterChange } = this.props;
 
     // onClick is passed as a props so that dom elements can be custom arrows
 
@@ -280,9 +285,19 @@ class Slider extends Component {
       key: 1,
       currentSlide,
       infinite,
+      swipe,
+      draggable,
       transitionSpeed,
       transitionTimingFn,
       vertical,
+      onMouseDown: ::this.handleSwipeStart,
+      onMouseMove: this.state.swiping ? ::this.handleSwipeMove : null,
+      onMouseUp: ::this.handleSwipeEnd,
+      onMouseLeave: this.state.swiping ? ::this.handleSwipeEnd : null,
+      onTouchStart: ::this.handleSwipeStart,
+      onTouchMove: this.state.swiping ? ::this.handleSwipeMove : null,
+      onTouchEnd: ::this.handleSwipeEnd,
+      onTouchCancel: this.state.swiping ? ::this.handleSwipeEnd : null,
       beforeChange,
       afterChange,
       translateXOffset,
@@ -290,16 +305,7 @@ class Slider extends Component {
     });
 
     return (
-      <div ref="slider"
-           onMouseDown={::this.handleSwipeStart}
-           onMouseMove={this.state.swiping ? ::this.handleSwipeMove : null}
-           onMouseUp={::this.handleSwipeEnd}
-           onMouseLeave={this.state.swiping ? ::this.handleSwipeEnd : null}
-           onTouchStart={::this.handleSwipeStart}
-           onTouchMove={this.state.swiping ? ::this.handleSwipeMove : null}
-           onTouchEnd={::this.handleSwipeEnd}
-           onTouchCancel={this.state.swiping ? ::this.handleSwipeEnd : null}
-           style={{ display: 'flex', alignItems: 'center'}} >
+      <div ref="slider" style={{ display: 'flex', alignItems: 'center'}}>
         {newLeftArrow}
         {newSlides}
         {newRightArrow}

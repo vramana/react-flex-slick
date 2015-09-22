@@ -40,9 +40,9 @@ class NonInfinite extends Component {
 
   render() {
     return (
-      <Slider swipe draggable >
+      <Slider currentSlide={2}>
         <PrevArrow activeClassName="non-infinite-left--active"
-                   inactiveClassName="non-infinite-left--inactice" />
+                   inactiveClassName="non-infinite-left--inactive" />
         <Slides {...this.props}>
           <div style={slideStyle}><h1>1</h1></div>
           <div style={slideStyle}><h1>2</h1></div>
@@ -52,7 +52,7 @@ class NonInfinite extends Component {
           <div style={slideStyle}><h1>6</h1></div>
         </Slides>
         <NextArrow activeClassName="non-infinite-right--active"
-                    inactiveClassName="non-infinite-right--inactice" />
+                    inactiveClassName="non-infinite-right--inactive" />
       </Slider>
     );
   }
