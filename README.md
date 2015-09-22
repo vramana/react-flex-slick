@@ -76,7 +76,7 @@ To run the examples:
 
 ### Methods
 
-No slick method will be supported because the encourage anti-patterns in react i.e, changing
+No slick method will be supported because they encourage anti-patterns in react i.e, changing
 the state of child component via a parent component directly or indirectly using setState.
 You can add all this by passing props to the Slider component. Detailed examples will be written
 showing how.
