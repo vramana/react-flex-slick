@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Slider, Slides, PrevArrow, NextArrow } from '../src';
+import { Slider, Slides, PrevArrow, NextArrow, Dots } from '../src';
 
 import './index.css';
 
@@ -53,6 +53,7 @@ class NonInfinite extends Component {
         </Slides>
         <NextArrow activeClassName="non-infinite-right--active"
                     inactiveClassName="non-infinite-right--inactive" />
+        <Dots />
       </Slider>
     );
   }
@@ -73,6 +74,7 @@ class Infinite extends Component {
           <div style={slideStyle}><h1>6</h1></div>
         </Slides>
         <NextArrow />
+        <Dots />
       </Slider>
     );
   }

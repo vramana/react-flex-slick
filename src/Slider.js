@@ -281,29 +281,29 @@ class Slider extends Component {
     const { children, vertical, infinite, swipe, draggable } = this.props;
     const { transitionSpeed, transitionTimingFn } = this.props;
     const { beforeChange, afterChange } = this.props;
-    const [ leftArrow, slides, rightArrow ] = children;
+    const [ leftArrow, slides, rightArrow, customComponent ] = children;
     const { currentSlide, translateXOffset, translateYOffset } = this.state;
     const slideCount = Children.count(slides.props.children);
 
     // onClick is passed as a props so that dom elements can be custom arrows
 
-    const newLeftArrow = cloneElement(leftArrow, {
+    const newLeftArrow = leftArrow !== undefined ? cloneElement(leftArrow, {
       key: 0,
       handleClick: () => { this.handleSlideShift(-1); },
       onClick: () => { this.handleSlideShift(-1); },
       currentSlide,
       infinite
-    });
+    }) : null;
 
     // Need to pass slideCount to check if end of slide has been reached.
-    const newRightArrow = cloneElement(rightArrow, {
+    const newRightArrow = rightArrow !== undefined ? cloneElement(rightArrow, {
       key: 2,
       handleClick: () => { this.handleSlideShift(1); },
       onClick: () => { this.handleSlideShift(1); },
       currentSlide,
       infinite,
       slideCount
-    });
+    }) : null;
 
     // TODO Show a warning if transitionSpeed prop is declared on Slides.
     const newSlides = cloneElement(slides, {
@@ -329,11 +329,20 @@ class Slider extends Component {
       translateYOffset
     });
 
+    const newCustomComponent = customComponent !== undefined ? cloneElement(customComponent, {
+      currentSlide,
+      slideCount,
+      handleSlideShift: ::this.handleSlideShift
+    }) : null;
+
     return (
-      <div ref="slider" style={{ display: 'flex', alignItems: 'center'}}>
-        {newLeftArrow}
-        {newSlides}
-        {newRightArrow}
+      <div>
+        <div ref="slider" style={{ display: 'flex', alignItems: 'center'}}>
+          {newLeftArrow}
+          {newSlides}
+          {newRightArrow}
+        </div>
+        {newCustomComponent}
       </div>
     );
   }
