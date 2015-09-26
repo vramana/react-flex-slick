@@ -66,10 +66,12 @@ To run the examples:
   is not implemented yet.
 - useCSS - Not supported: We don't have to fallback for jQuery animations for ancient browsers
   because we dont support them in first place.
+- dots, dotClass - works almost as expected. Instead of dotClass on slider give it as
+  className in the `Dots` component
 
-**Remaining**: slidesToShow, slidesToScroll, accessibility, rtl, dots, dotClass,
-pauseOnHover, pauseOnDotsHover, responsive, swipeToSlide, slide, variableWidth,
-centerMode, fade, lazyLoad, respondTo
+**Remaining**: slidesToShow, slidesToScroll, accessibility, rtl, pauseOnHover,
+pauseOnDotsHover, responsive, swipeToSlide, slide, variableWidth, centerMode,
+fade, lazyLoad, respondTo
 
 **Progress** - Total: 43 Current: 27
 
