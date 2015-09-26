@@ -73,7 +73,7 @@ To run the examples:
 pauseOnDotsHover, responsive, swipeToSlide, slide, variableWidth, centerMode,
 fade, lazyLoad, respondTo
 
-**Progress** - Total: 43 Current: 27
+**Progress** - Total: 43 Current: 29
 
 ### Events
 
