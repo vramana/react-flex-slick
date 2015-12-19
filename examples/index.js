@@ -21,6 +21,14 @@ class App extends Component {
           <h2>Custom arrows</h2>
           <CustomArrows width={580} height={150} />
         </div>
+        <div>
+          <h2>Control Play (will autoPlay after 5s)</h2>
+          <ControlPlay width={580} height={150} />
+        </div>
+        <div>
+          <h2>Set slide to show (will show the 6th slide after 5s)</h2>
+          <SetSlide width={580} height={150} />
+        </div>
       </div>
     );
   }
@@ -85,6 +93,63 @@ class CustomArrows extends Component {
   render() {
     return (
       <Slider infinite swipe draggable >
+        <button>Prev</button>
+        <Slides {...this.props}>
+          <div style={slideStyle}><h1>1</h1></div>
+          <div style={slideStyle}><h1>2</h1></div>
+          <div style={slideStyle}><h1>3</h1></div>
+          <div style={slideStyle}><h1>4</h1></div>
+          <div style={slideStyle}><h1>5</h1></div>
+          <div style={slideStyle}><h1>6</h1></div>
+        </Slides>
+        <button>Next</button>
+      </Slider>
+    );
+  }
+}
+
+class ControlPlay extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { playing: false };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ playing: true });
+    }, 5000);
+  }
+
+  render() {
+    return (
+      <Slider infinite swipe draggable autoPlay={this.state.playing} >
+        <button>Prev</button>
+        <Slides {...this.props}>
+          <div style={slideStyle}><h1>1</h1></div>
+          <div style={slideStyle}><h1>2</h1></div>
+          <div style={slideStyle}><h1>3</h1></div>
+          <div style={slideStyle}><h1>4</h1></div>
+          <div style={slideStyle}><h1>5</h1></div>
+          <div style={slideStyle}><h1>6</h1></div>
+        </Slides>
+        <button>Next</button>
+      </Slider>
+    );
+  }
+}
+
+class SetSlide extends Component {
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.refs.slider.setState({ currentSlide: 5 });
+    }, 5000);
+  }
+
+  render() {
+    return (
+      <Slider ref="slider" infinite swipe draggable >
         <button>Prev</button>
         <Slides {...this.props}>
           <div style={slideStyle}><h1>1</h1></div>
