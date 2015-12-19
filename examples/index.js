@@ -116,9 +116,13 @@ class ControlPlay extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.setState({ playing: true });
     }, 5000);
+  }
+
+  componentDidUnmount() {
+    clearTimeout(this.timeout);
   }
 
   render() {
@@ -142,9 +146,13 @@ class ControlPlay extends Component {
 class SetSlide extends Component {
 
   componentDidMount() {
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.refs.slider.setState({ currentSlide: 5 });
     }, 5000);
+  }
+
+  componentDidUnmount() {
+    clearTimeout(this.timeout);
   }
 
   render() {
