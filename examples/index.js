@@ -144,10 +144,15 @@ class ControlPlay extends Component {
 }
 
 class SetSlide extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = { currentSlide: 0 };
+  }
 
   componentDidMount() {
     this.timeout = setTimeout(() => {
-      this.refs.slider.setState({ currentSlide: 5 });
+      this.setState({ currentSlide: 5 });
     }, 5000);
   }
 
@@ -157,7 +162,7 @@ class SetSlide extends Component {
 
   render() {
     return (
-      <Slider ref="slider" infinite swipe draggable >
+      <Slider {...this.state} infinite swipe draggable >
         <button>Prev</button>
         <Slides {...this.props}>
           <div style={slideStyle}><h1>1</h1></div>
