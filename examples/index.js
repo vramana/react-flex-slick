@@ -121,7 +121,7 @@ class ControlPlay extends Component {
     }, 5000);
   }
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     clearTimeout(this.timeout);
   }
 
@@ -156,7 +156,7 @@ class SetSlide extends Component {
     }, 5000);
   }
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     clearTimeout(this.timeout);
   }
 
