@@ -96,7 +96,7 @@ class NextArrow extends Component {
     return (
       <div
         {...props}
-        className={adjustedClassName}
+        className={`${adjustedClassName}${className ? ` ${className}` : '' }`}
         style={adjustedStyle}
         onClick={::this.props.handleClick}
       />
