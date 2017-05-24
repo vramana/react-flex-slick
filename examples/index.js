@@ -144,7 +144,7 @@ class ControlPlay extends Component {
 }
 
 class SetSlide extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = { currentSlide: 0 };

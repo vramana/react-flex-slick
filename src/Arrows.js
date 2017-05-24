@@ -1,68 +1,105 @@
-import React, { Component, PropTypes } from 'react';
+import { default as React, Component, PropTypes } from 'react';
 
 class PrevArrow extends Component {
   static propTypes = {
+    className: PropTypes.string,
     handleClick: PropTypes.func,
     currentSlide: PropTypes.number,
     activeClassName: PropTypes.string,
     inactiveClassName: PropTypes.string,
-    infinite: PropTypes.bool
-  }
+    infinite: PropTypes.bool,
+    style: PropTypes.object
+  };
 
   static defaultProps = {
     activeClassName: '',
     inactiveClassName: ''
-  }
+  };
 
   render() {
-    const { activeClassName, inactiveClassName, currentSlide, infinite } = this.props;
+    const {
+      activeClassName,
+      inactiveClassName,
+      currentSlide,
+      infinite,
+      className,
+      style,
+      ...props
+    } = this.props;
 
-    const className = currentSlide === 0 && infinite === false ? inactiveClassName : activeClassName;
-    const style = className !== '' ? null : {
-      width: 0,
-      height: 0,
-      borderBottom: 'solid 30px transparent',
-      borderTop: 'solid 30px transparent',
-      borderRight: 'solid 40px #795548'
+    const adjustedClassName = currentSlide === 0 && infinite === false ? inactiveClassName : activeClassName;
+
+    const adjustedStyle = {
+      ...style,
+      ...(adjustedClassName !== '' ? {} : {
+        width: 0,
+        height: 0,
+        borderBottom: 'solid 30px transparent',
+        borderTop: 'solid 30px transparent',
+        borderRight: 'solid 40px #795548'
+      })
     };
 
     return (
-      <div className={className} style={style} onClick={::this.props.handleClick}>
-      </div>
+      <div
+        {...props}
+        className={`${adjustedClassName}${className ? ` ${className}` : '' }`}
+        style={adjustedStyle}
+        onClick={::this.props.handleClick}
+      />
     );
   }
 }
 
 class NextArrow extends Component {
   static propTypes = {
+    className: PropTypes.string,
     handleClick: PropTypes.func,
     currentSlide: PropTypes.number,
     activeClassName: PropTypes.string,
     inactiveClassName: PropTypes.string,
     infinite: PropTypes.bool,
-    slideCount: PropTypes.number
-  }
+    slideCount: PropTypes.number,
+    style: PropTypes.object
+  };
 
   static defaultProps = {
     activeClassName: '',
     inactiveClassName: ''
-  }
+  };
 
   render() {
-    const { activeClassName, inactiveClassName, currentSlide } = this.props;
-    const { infinite, slideCount } = this.props;
+    const {
+      infinite,
+      slideCount,
+      activeClassName,
+      inactiveClassName,
+      currentSlide,
+      className,
+      style,
+      ...props
+    } = this.props;
 
-    const className = (currentSlide + 1) === slideCount && infinite === false ? inactiveClassName : activeClassName;
-    const style = className !== '' ? null : {
-      width: 0,
-      height: 0,
-      borderBottom: 'solid 30px transparent',
-      borderTop: 'solid 30px transparent',
-      borderLeft: 'solid 40px #795548'
+    const adjustedClassName = (currentSlide + 1) === slideCount && infinite === false ? inactiveClassName : activeClassName;
+
+    const adjustedStyle = {
+      ...style,
+      ...(adjustedClassName !== '' ? {} : {
+        width: 0,
+        height: 0,
+        borderBottom: 'solid 30px transparent',
+        borderTop: 'solid 30px transparent',
+        borderLeft: 'solid 40px #795548'
+      })
     };
 
     return (
-      <div className={className} style={style} onClick={::this.props.handleClick}></div>
+      <div
+        {...props}
+        className={`${adjustedClassName}${className ? ` ${className}` : '' }`}
+        style={adjustedStyle}
+        onClick={::this.props.handleClick}
+      />
     );
   }
 }
